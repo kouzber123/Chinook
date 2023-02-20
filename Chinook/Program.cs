@@ -1,4 +1,5 @@
 ﻿using Chinook.Repositories;
+using ICustomerRepository.Models;
 using Microsoft.Data.SqlClient;
 
 namespace ICustomerRepository
@@ -11,17 +12,6 @@ namespace ICustomerRepository
            
 
             var customerRepository = new CustomerRepository{ ConnectionString = GetConnectionString() };
-
-            var customerById = customerRepository.GetById(1);
-
-            Console.WriteLine(customerById.Email);
-
-            var customerByName = customerRepository.GetByName("Daan","Peeters");
-            Console.WriteLine(customerByName.Email);
-
-            customerRepository.Update(new Models.Customer(60, "Matti", "Meikäläinen", "Finland", "00100", "+358501234567", "matinsposti@gmail.com"));
-
-
             var allCustomers =  customerRepository.GetAll();
             foreach (var customer in allCustomers)
             {
