@@ -119,7 +119,6 @@ namespace Chinook.Repositories
             return result;
         }
 
-<<<<<<< HEAD
         public void Update(Customer entity) 
         {
             using var connection = new SqlConnection(ConnectionString);
@@ -142,7 +141,7 @@ namespace Chinook.Repositories
 
 
         }
-=======
+
         public void AddCustomer(Customer customer)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -164,7 +163,5 @@ namespace Chinook.Repositories
             }
         }
 
-        public void Update(Customer entity) { }
->>>>>>> addcustomer
     }
 }

@@ -2003,19 +2003,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\JKuula\\.nuget\\packages\\": {}
+    "C:\\Users\\TNguye\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\JKuula\\Source\\Repos\\Chinook\\Chinook\\Chinook.csproj",
+      "projectUniqueName": "C:\\Users\\TNguye\\source\\repos\\Chinook\\Chinook\\Chinook.csproj",
       "projectName": "Chinook",
-      "projectPath": "C:\\Users\\JKuula\\Source\\Repos\\Chinook\\Chinook\\Chinook.csproj",
-      "packagesPath": "C:\\Users\\JKuula\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\JKuula\\Source\\Repos\\Chinook\\Chinook\\obj\\",
+      "projectPath": "C:\\Users\\TNguye\\source\\repos\\Chinook\\Chinook\\Chinook.csproj",
+      "packagesPath": "C:\\Users\\TNguye\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\TNguye\\source\\repos\\Chinook\\Chinook\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\JKuula\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\TNguye\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2057,12 +2057,30 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.14, 6.0.14]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.14, 6.0.14]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.14, 6.0.14]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.14, 6.0.14]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }
