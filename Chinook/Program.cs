@@ -9,7 +9,14 @@ namespace ICustomerRepository
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-           
+
+            var genreRepository = new CustomerGenreRepository { ConnectionString = GetConnectionString() };
+
+            var topgenre = genreRepository.GetCustomerTopGenre(1);
+            foreach (var genre in topgenre)
+            {
+                Console.WriteLine(genre.Genre, genre.GenreTotal);
+            }
 
             var customerRepository = new CustomerRepository{ ConnectionString = GetConnectionString() };
             var allCustomers =  customerRepository.GetAll();

@@ -15,5 +15,7 @@ namespace ICustomerRepository
         T GetById(Id id);
         void Add(T entity);
         void Update(T entity);
+
+        IEnumerable<T> GetGetCustomerTopGenre(Id id);
     }
 }

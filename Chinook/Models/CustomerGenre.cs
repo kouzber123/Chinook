@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chinook.Models
 {
-    public readonly record struct CustomerGenre(int CustomerId, string FirstName, string LastName, string Genre, int GenreTotal)
+    public readonly record struct CustomerGenre(string FirstName, string LastName, string Genre, int GenreTotal)
     {
     }
 }
