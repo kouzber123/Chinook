@@ -36,6 +36,28 @@ namespace Chinook.Repositories
                   
                     );
             }
+        }    
+        public IEnumerable<Customer> GetCustomersWithLimit()
+        {
+            using var connection = new SqlConnection(ConnectionString);
+            connection.Open();
+            var sql = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer ORDER BY CustomerId";
+            using var command = new SqlCommand(sql, connection);
+            using SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                yield return new Customer(
+                    reader.GetInt32(0),
+                    reader.GetString(1),
+                    reader.GetString(2),
+                    reader.GetString(3),
+                    reader.GetString(4),
+                    reader.GetString(5),
+                    reader.GetString(6)
+                  
+                    );
+            }
         }
 
         public Customer GetById(int id) 
@@ -79,6 +101,27 @@ namespace Chinook.Repositories
 
             //        );
             //}
+        }
+
+        public void AddCustomer(Customer customer)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "INSERT INTO Customer (FirstName, LastName, Country, PostalCode, Phone, Email) VALUES (@FirstName, @LastName, @Country, @PostalCode, @Phone, @Email)";
+                    command.Parameters.AddWithValue("@FirstName", customer.Fname);
+                    command.Parameters.AddWithValue("@LastName", customer.Lname);
+                    command.Parameters.AddWithValue("@Country", customer.Country);
+                    command.Parameters.AddWithValue("@PostalCode", customer.PostalCode);
+                    command.Parameters.AddWithValue("@Phone", customer.Phone);
+                    command.Parameters.AddWithValue("@Email", customer.Email);
+                    command.ExecuteNonQuery();
+
+                   
+                }
+            }
         }
 
         public void Update(Customer entity) { }
