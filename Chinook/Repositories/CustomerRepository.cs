@@ -68,24 +68,33 @@ namespace Chinook.Repositories
         }
 
 
-        public Customer GetByName(string name) 
+        public Customer GetByName(string firstname, string lastname) 
         {
             using var connection = new SqlConnection(ConnectionString);
             connection.Open();
-            var sql = "SELECT * FROM Customer WHERE FirstName = @name";
+            var sql = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer WHERE FirstName like @firstname and LastName like @lastname";
             using var command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@FirstName", name);
+            command.Parameters.AddWithValue("@FirstName", firstname);
+            command.Parameters.AddWithValue("@LastName", lastname);
             using var reader = command.ExecuteReader();
+            var result = new Customer();
 
-            //return result = new Customer();
-            return new Customer();
-            //while (reader.Read())
-            //{
-            //    result = new Customer(
-            //        //reader.GetInt32(0),
+            while (reader.Read())
+            {
+                result = new Customer(
+                    //reader.GetInt32(0),
+                    reader.GetInt32(0),
+                    reader.GetString(1),
+                    reader.GetString(2),
+                    reader.GetString(3),
+                    reader.GetString(4),
+                    reader.GetString(5),
+                    reader.GetString(6)
 
-            //        );
-            //}
+                    );
+            }
+
+            return result;
         }
 
         public void Update(Customer entity) { }
