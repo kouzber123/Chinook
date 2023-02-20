@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "/9C3hWWWTx1PYM2L5xTqhIKnrpJWdxR0ygneU76pIZyF0pI+B7ptSqUL+uJ6cf9KlfDcpjXqC/VtAop7wz0Hyw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\TNguye\\source\\repos\\Chinook\\Chinook\\Chinook.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\TNguye\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.14\\microsoft.windowsdesktop.app.ref.6.0.14.nupkg.sha512",
+    "C:\\Users\\TNguye\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.14\\microsoft.netcore.app.ref.6.0.14.nupkg.sha512",
+    "C:\\Users\\TNguye\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.14\\microsoft.aspnetcore.app.ref.6.0.14.nupkg.sha512",
+    "C:\\Users\\TNguye\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.14\\microsoft.netcore.app.host.win-x64.6.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}
