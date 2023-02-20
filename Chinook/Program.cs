@@ -19,6 +19,8 @@ namespace ICustomerRepository
             var customerByName = customerRepository.GetByName("Daan","Peeters");
             Console.WriteLine(customerByName.Email);
 
+            customerRepository.Update(new Models.Customer(60, "Matti", "Meikäläinen", "Finland", "00100", "+358501234567", "matinsposti@gmail.com"));
+
 
             var allCustomers =  customerRepository.GetAll();
             foreach (var customer in allCustomers)

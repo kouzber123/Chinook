@@ -97,6 +97,27 @@ namespace Chinook.Repositories
             return result;
         }
 
-        public void Update(Customer entity) { }
+        public void Update(Customer entity) 
+        {
+            using var connection = new SqlConnection(ConnectionString);
+            connection.Open();
+            var sql = "UPDATE Customer SET FirstName = @FirstName, LastName = @LastName, Country = @Country, PostalCode = @PostalCode, Phone = @Phone, Email = @Email " +
+                "WHERE CustomerId = @CustomerId";
+            using var command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@FirstName", entity.Fname);
+            command.Parameters.AddWithValue("@LastName", entity.Lname);
+            command.Parameters.AddWithValue("@Country", entity.Country);
+            command.Parameters.AddWithValue("@PostalCode", entity.PostalCode);
+            command.Parameters.AddWithValue("@Phone", entity.Phone);
+            command.Parameters.AddWithValue("@Email", entity.Email);
+            command.Parameters.AddWithValue("@CustomerId", entity.Id);
+
+            command.ExecuteNonQuery();
+
+
+
+
+
+        }
     }
 }
