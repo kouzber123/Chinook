@@ -12,11 +12,13 @@ namespace ICustomerRepository
            
 
             var customerRepository = new CustomerRepository{ ConnectionString = GetConnectionString() };
-            var allCustomers =  customerRepository.GetAll();
-            foreach (var customer in allCustomers)
-            {
-                Console.WriteLine(customer.Fname);
-            }
+            Customer customer = new() { Fname = "tom", Lname = "dd", Country = "dd", Email = "dsdas", Phone = "dds", PostalCode = "dasdsasd" };
+            customerRepository.AddCustomer(customer);
+
+            //foreach (var topCountry in allCustomers)
+            //{
+            //    Console.WriteLine(topCountry);
+            //}
     
             static string GetConnectionString()
             {

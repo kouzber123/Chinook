@@ -1,7 +1,9 @@
-﻿using ICustomerRepository.Models;
+﻿using Chinook.Models;
+using ICustomerRepository.Models;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,11 @@ namespace Chinook.Repositories
 
         public string ConnectionString { get; set; } = string.Empty;
 
-        public IEnumerable<Customer> GetAll()
+        /// <summary>
+        /// set limit how many customers can we set and from where > row 15 and next 12
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Customer> GetCustomersWithLimit()
         {
             using var connection = new SqlConnection(ConnectionString);
             connection.Open();
@@ -36,8 +42,8 @@ namespace Chinook.Repositories
                   
                     );
             }
-        }    
-        public IEnumerable<Customer> GetCustomersWithLimit()
+        }
+        public IEnumerable<Customer> GetAllCustomers()
         {
             using var connection = new SqlConnection(ConnectionString);
             connection.Open();
@@ -55,11 +61,53 @@ namespace Chinook.Repositories
                     reader.GetString(4),
                     reader.GetString(5),
                     reader.GetString(6)
-                  
+
                     );
             }
         }
+        /// <summary>
+        ///SORT COUNTRY BY HOW MANY CUSTOMERS INNIT
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<CustomerCountry> TopCountriesByCustomerAmount()
+        {
+            using var connection = new SqlConnection(ConnectionString);
+            connection.Open();
+            var sql = "select c.Country, COUNT(*) AS total_customers from Customer c GROUP BY Country ORDER BY total_customers DESC";
+            using var command = new SqlCommand(sql, connection);
+            using SqlDataReader reader = command.ExecuteReader();
 
+            while (reader.Read())
+            {
+                yield return new CustomerCountry(               
+                    reader.GetString(0),
+                    reader.GetInt32(1)
+                    );
+            }
+        } 
+
+        /// <summary>
+        /// SORT CUSTOMERS BY THEIR SPENDING
+        /// </summary>
+        /// <returns></returns>
+            public IEnumerable<CustomerSpend> TopSpendingCustomers()
+        {
+            using var connection = new SqlConnection(ConnectionString);
+            connection.Open();
+            var sql = "select CustomerId, SUM(Total) as total_invoice from Invoice Group By CustomerId ORDER BY total_invoice DESC";
+            using var command = new SqlCommand(sql, connection);
+            using SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                yield return new CustomerSpend(
+                    reader.GetInt32(0),
+                    reader.GetDecimal(1)
+                    ) ;
+            }
+        }    
+  
+    
         public Customer GetById(int id) 
         {
             using var connection = new SqlConnection(ConnectionString);
@@ -119,6 +167,10 @@ namespace Chinook.Repositories
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
         public void Update(Customer entity) 
         {
             using var connection = new SqlConnection(ConnectionString);
@@ -136,31 +188,29 @@ namespace Chinook.Repositories
 
             command.ExecuteNonQuery();
 
-
+          
 
 
 
         }
 
+        /// <summary>
+        /// Add customer to the database accept customer object as parameter
+        /// </summary>
+        /// <param name="customer"></param>
         public void AddCustomer(Customer customer)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                using (SqlCommand command = connection.CreateCommand())
-                {
-                    command.CommandText = "INSERT INTO Customer (FirstName, LastName, Country, PostalCode, Phone, Email) VALUES (@FirstName, @LastName, @Country, @PostalCode, @Phone, @Email)";
-                    command.Parameters.AddWithValue("@FirstName", customer.Fname);
-                    command.Parameters.AddWithValue("@LastName", customer.Lname);
-                    command.Parameters.AddWithValue("@Country", customer.Country);
-                    command.Parameters.AddWithValue("@PostalCode", customer.PostalCode);
-                    command.Parameters.AddWithValue("@Phone", customer.Phone);
-                    command.Parameters.AddWithValue("@Email", customer.Email);
-                    command.ExecuteNonQuery();
-
-                   
-                }
-            }
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            connection.Open();
+            string sql = "INSERT INTO Customer (FirstName, LastName, Country, PostalCode, Phone, Email) VALUES (@FirstName, @LastName, @Country, @PostalCode, @Phone, @Email)";
+            using SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@FirstName", customer.Fname);
+            command.Parameters.AddWithValue("@LastName", customer.Lname);
+            command.Parameters.AddWithValue("@Country", customer.Country);
+            command.Parameters.AddWithValue("@PostalCode", customer.PostalCode);
+            command.Parameters.AddWithValue("@Phone", customer.Phone);
+            command.Parameters.AddWithValue("@Email", customer.Email);
+            command.ExecuteNonQuery();
         }
 
     }
