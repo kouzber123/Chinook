@@ -1,12 +1,6 @@
 ﻿using Chinook.Models;
 using ICustomerRepository.Models;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chinook.Repositories
 {
@@ -43,6 +37,10 @@ namespace Chinook.Repositories
                     );
             }
         }
+        /// <summary>
+        /// get all customers with no limit 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Customer> GetAllCustomers()
         {
             using var connection = new SqlConnection(ConnectionString);
@@ -107,7 +105,12 @@ namespace Chinook.Repositories
             }
         }    
   
-    
+        
+        /// <summary>
+        /// Get customer by id, parameter is int ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Customer GetById(int id) 
         {
             using var connection = new SqlConnection(ConnectionString);
@@ -138,6 +141,12 @@ namespace Chinook.Repositories
         }
 
 
+        /// <summary>
+        /// Get user by firstname and lastname string return with like operator matching customers
+        /// </summary>
+        /// <param name="firstname"></param>
+        /// <param name="lastname"></param>
+        /// <returns></returns>
         public Customer GetByName(string firstname, string lastname) 
         {
             using var connection = new SqlConnection(ConnectionString);
@@ -168,7 +177,7 @@ namespace Chinook.Repositories
         }
 
         /// <summary>
-        /// 
+        /// Update Customer by matching customer object
         /// </summary>
         /// <param name="entity"></param>
         public void Update(Customer entity) 
@@ -187,10 +196,6 @@ namespace Chinook.Repositories
             command.Parameters.AddWithValue("@CustomerId", entity.Id);
 
             command.ExecuteNonQuery();
-
-          
-
-
 
         }
 
