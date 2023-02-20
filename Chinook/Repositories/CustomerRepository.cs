@@ -42,9 +42,9 @@ namespace Chinook.Repositories
         {
             using var connection = new SqlConnection(ConnectionString);
             connection.Open();
-            var sql = "SELECT GuitarId, GuitarDescription, BrandId FROM Guitar WHERE GuitarId = @GuitarId";
+            var sql = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer WHERE CustomerId = @CustomerId";
             using var command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@GuitarId", id);
+            command.Parameters.AddWithValue("@CustomerId", id);
             using var reader = command.ExecuteReader();
 
             var result = new Customer();
@@ -53,7 +53,14 @@ namespace Chinook.Repositories
             {
                 result = new Customer(
                     //reader.GetInt32(0),
-                
+                    reader.GetInt32(0),
+                    reader.GetString(1),
+                    reader.GetString(2),
+                    reader.GetString(3),
+                    reader.GetString(4),
+                    reader.GetString(5),
+                    reader.GetString(6)
+
                     );
             }
 

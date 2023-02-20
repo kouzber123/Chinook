@@ -8,8 +8,12 @@ namespace ICustomerRepository
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
+           
 
             var customerRepository = new CustomerRepository{ ConnectionString = GetConnectionString() };
+            var customerById = customerRepository.GetById(1);
+
+            Console.WriteLine(customerById.Email);
             var allCustomers =  customerRepository.GetAll();
             foreach (var customer in allCustomers)
             {
