@@ -23,8 +23,8 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
-bin/
-obj/
+Chinook/bin/
+Chinook/obj/
 TestResults/
 ###################
 # Web publish log #
