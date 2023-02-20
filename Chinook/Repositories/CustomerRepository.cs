@@ -30,13 +30,7 @@ namespace Chinook.Repositories
                     reader.GetString(3),
                     reader.GetString(4),
                     reader.GetString(5),
-                    reader.GetString(6),
-                    reader.GetString(7),
-                    reader.GetString(8),
-                    reader.GetString(9),
-                    reader.GetString(10),
-                    reader.GetString(11),             
-                    reader.GetInt32(12)
+                    reader.GetString(6)
                    
 
                   
