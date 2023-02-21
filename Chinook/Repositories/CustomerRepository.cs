@@ -13,27 +13,28 @@ namespace Chinook.Repositories
         /// set limit how many customers can we set and from where > row 15 and next 12
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Customer> GetCustomersWithLimit()
+        public IEnumerable<Customer> GetCustomersWithLimit(int offset, int limit)
         {
             using var connection = new SqlConnection(ConnectionString);
             connection.Open();
-            var sql = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer ORDER BY CustomerId OFFSET 14 ROWS FETCH NEXT 12 ROWS ONLY";
+            var sql = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer ORDER BY CustomerId OFFSET @Offset ROWS FETCH NEXT @Limit ROWS ONLY";
             using var command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Offset", offset);
+            command.Parameters.AddWithValue("@Limit", limit);
             using SqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
                 yield return new Customer(
                     reader.GetInt32(0),
-                    reader.GetString(1),
-                    reader.GetString(2),
-                    reader.GetString(3),
-                    reader.GetString(4),
-                    reader.GetString(5),
-                    reader.GetString(6)
-                   
+                    (reader.IsDBNull(1) == true) ? String.Empty : reader.GetString(1),
+                    (reader.IsDBNull(2) == true) ? String.Empty : reader.GetString(2),
+                    (reader.IsDBNull(3) == true) ? String.Empty : reader.GetString(3),
+                    (reader.IsDBNull(4) == true) ? String.Empty : reader.GetString(4),
+                    (reader.IsDBNull(5) == true) ? String.Empty : reader.GetString(5),
+                    (reader.IsDBNull(6) == true) ? String.Empty : reader.GetString(6)
 
-                  
+
                     );
             }
         }
@@ -45,7 +46,7 @@ namespace Chinook.Repositories
         {
             using var connection = new SqlConnection(ConnectionString);
             connection.Open();
-            var sql = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer ORDER BY CustomerId";
+            var sql = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer";
             using var command = new SqlCommand(sql, connection);
             using SqlDataReader reader = command.ExecuteReader();
 
@@ -53,12 +54,13 @@ namespace Chinook.Repositories
             {
                 yield return new Customer(
                     reader.GetInt32(0),
-                    reader.GetString(1),
-                    reader.GetString(2),
-                    reader.GetString(3),
-                    reader.GetString(4),
-                    reader.GetString(5),
-                    reader.GetString(6)
+                    (reader.IsDBNull(1) == true) ? String.Empty : reader.GetString(1),
+                    (reader.IsDBNull(2) == true) ? String.Empty : reader.GetString(2),
+                    (reader.IsDBNull(3) == true) ? String.Empty : reader.GetString(3),
+                    (reader.IsDBNull(4) == true) ? String.Empty : reader.GetString(4),
+                    (reader.IsDBNull(5) == true) ? String.Empty : reader.GetString(5),
+                    (reader.IsDBNull(6) == true) ? String.Empty : reader.GetString(6)
+
 
                     );
             }
@@ -125,7 +127,6 @@ namespace Chinook.Repositories
             while (reader.Read())
             {
                 result = new Customer(
-                    //reader.GetInt32(0),
                     reader.GetInt32(0),
                     reader.GetString(1),
                     reader.GetString(2),
