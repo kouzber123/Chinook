@@ -8,7 +8,6 @@ namespace ICustomerRepository
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
 
             var customerRepository = new CustomerRepository { ConnectionString = GetConnectionString() };
             var genreRepository = new CustomerGenreRepository { ConnectionString = GetConnectionString() };
@@ -21,7 +20,6 @@ namespace ICustomerRepository
 
             //2
             var customerId = customerRepository.GetById(1);
-
             Console.WriteLine($"Customer by ID {customerId}");
 
             //3
@@ -33,20 +31,15 @@ namespace ICustomerRepository
             foreach (var consumer in setLimits)
             {
                 Console.WriteLine(consumer);
-
             }
 
             //5
-            var addCustomer = new CustomerRepository { ConnectionString = GetConnectionString() };
-            Customer customer = new() { Fname = "tom", Lname = "dd", Country = "dd", Email = "dsdas", Phone = "dds", PostalCode = "dasdsasd" };
-            addCustomer.AddCustomer(customer);
+            Customer newCustomer = new() { Fname = "tom", Lname = "dd", Country = "dd", Email = "dsdas", Phone = "dds", PostalCode = "dasdsasd" };
+            customerRepository.AddCustomer(newCustomer);
 
             //6
-            var updateCustomer = new CustomerRepository { ConnectionString = GetConnectionString() };
-            Customer customerUpdated = new() { Fname = "tom", Lname = "tomson", Country = "England", Email = "dsdasLLLL", Phone = "djj", PostalCode = "dasdsasd" };
-            updateCustomer.Update(customerUpdated);
-
-           
+            customerRepository.Update(new Customer(23, "John", "Gordon", "USA", "2113", "+ 1(617) 522 - 1333", "johnsupdated22@yahoo.com"));
+                       
             //7
             var topCountries = customerRepository.TopCountriesByCustomerAmount();
             foreach (var consumer in topCountries)
@@ -67,12 +60,6 @@ namespace ICustomerRepository
             {
                 Console.WriteLine(genre.Genre, genre.GenreTotal);
             }
-
-
-
-
-
-
 
             static string GetConnectionString()
             {

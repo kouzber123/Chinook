@@ -6,7 +6,11 @@ namespace Chinook.Repositories
     public class CustomerGenreRepository
     {
         public string ConnectionString { get; set; } = string.Empty;
-
+        /// <summary>
+        /// Returns Customers top genre, if tie shows all tie genres
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<CustomerGenre> GetCustomerTopGenre(int id)
         {
             using var connection = new SqlConnection(ConnectionString);

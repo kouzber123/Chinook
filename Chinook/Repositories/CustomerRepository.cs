@@ -10,8 +10,10 @@ namespace Chinook.Repositories
         public string ConnectionString { get; set; } = string.Empty;
 
         /// <summary>
-        /// set limit how many customers can we set and from where > row 15 and next 12
+        /// Get all customers, filter by offset and limit
         /// </summary>
+        /// <param name="offset"></param>
+        /// <param name="limit"></param>
         /// <returns></returns>
         public IEnumerable<Customer> GetCustomersWithLimit(int offset, int limit)
         {
@@ -60,13 +62,11 @@ namespace Chinook.Repositories
                     (reader.IsDBNull(4) == true) ? String.Empty : reader.GetString(4),
                     (reader.IsDBNull(5) == true) ? String.Empty : reader.GetString(5),
                     (reader.IsDBNull(6) == true) ? String.Empty : reader.GetString(6)
-
-
                     );
             }
         }
         /// <summary>
-        ///SORT COUNTRY BY HOW MANY CUSTOMERS INNIT
+        ///Get Customer countries by amount of customers
         /// </summary>
         /// <returns></returns>
         public IEnumerable<CustomerCountry> TopCountriesByCustomerAmount()
@@ -87,7 +87,7 @@ namespace Chinook.Repositories
         } 
 
         /// <summary>
-        /// SORT CUSTOMERS BY THEIR SPENDING
+        /// Get customers sorted by their spending
         /// </summary>
         /// <returns></returns>
             public IEnumerable<CustomerSpend> TopSpendingCustomers()
@@ -128,13 +128,12 @@ namespace Chinook.Repositories
             {
                 result = new Customer(
                     reader.GetInt32(0),
-                    reader.GetString(1),
-                    reader.GetString(2),
-                    reader.GetString(3),
-                    reader.GetString(4),
-                    reader.GetString(5),
-                    reader.GetString(6)
-
+                    (reader.IsDBNull(1) == true) ? String.Empty : reader.GetString(1),
+                    (reader.IsDBNull(2) == true) ? String.Empty : reader.GetString(2),
+                    (reader.IsDBNull(3) == true) ? String.Empty : reader.GetString(3),
+                    (reader.IsDBNull(4) == true) ? String.Empty : reader.GetString(4),
+                    (reader.IsDBNull(5) == true) ? String.Empty : reader.GetString(5),
+                    (reader.IsDBNull(6) == true) ? String.Empty : reader.GetString(6)
                     );
             }
 
@@ -164,13 +163,12 @@ namespace Chinook.Repositories
                 result = new Customer(
                     //reader.GetInt32(0),
                     reader.GetInt32(0),
-                    reader.GetString(1),
-                    reader.GetString(2),
-                    reader.GetString(3),
-                    reader.GetString(4),
-                    reader.GetString(5),
-                    reader.GetString(6)
-
+                    (reader.IsDBNull(1) == true) ? String.Empty : reader.GetString(1),
+                    (reader.IsDBNull(2) == true) ? String.Empty : reader.GetString(2),
+                    (reader.IsDBNull(3) == true) ? String.Empty : reader.GetString(3),
+                    (reader.IsDBNull(4) == true) ? String.Empty : reader.GetString(4),
+                    (reader.IsDBNull(5) == true) ? String.Empty : reader.GetString(5),
+                    (reader.IsDBNull(6) == true) ? String.Empty : reader.GetString(6)
                     );
             }
 
