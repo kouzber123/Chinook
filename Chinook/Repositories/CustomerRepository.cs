@@ -127,14 +127,13 @@ namespace Chinook.Repositories
         /// <param name="firstname"></param>
         /// <param name="lastname"></param>
         /// <returns></returns>
-        public Customer GetByName(string firstname, string lastname) 
+        public Customer GetByName(string fullname) 
         {
             using var connection = new SqlConnection(ConnectionString);
             connection.Open();
-            var sql = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer WHERE FirstName like @firstname and LastName like @lastname";
+            var sql = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email  FROM Customer WHERE CONCAT(FirstName, ' ', LastName) like @Fullname";
             using var command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@FirstName", firstname);
-            command.Parameters.AddWithValue("@LastName", lastname);
+            command.Parameters.AddWithValue("@Fullname", fullname);
             using var reader = command.ExecuteReader();
             var result = new Customer();
 

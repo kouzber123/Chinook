@@ -27,7 +27,7 @@ namespace ICustomerRepository
             Console.WriteLine($"Customer by ID {customerId}");
 
             //3
-            var customerName = customerRepository.GetByName("Daan", "Peeters");
+            var customerName = customerRepository.GetByName("Daan Peeters");
             Console.WriteLine($"Customer by name {customerName}");
 
             //4
@@ -38,7 +38,7 @@ namespace ICustomerRepository
             }
 
             //5
-            Customer newCustomer = new() { Fname = "tom", Lname = "dubad", Country = "slaveyton", Email = "ds@ligma", Phone = "04401203213", PostalCode = "0550" };
+            Customer newCustomer = new() { Fname = "tom", Lname = "dubad", Country = "England", Email = "tomtom@tom.com", Phone = "04401203213", PostalCode = "0550" };
             customerRepository.AddCustomer(newCustomer);
 
             //6
@@ -64,7 +64,7 @@ namespace ICustomerRepository
             var topGenre = genreRepository.GetCustomerTopGenre(1);
             foreach (var genre in topGenre)
             {
-                Console.WriteLine(genre.Genre, genre.GenreTotal);
+                Console.WriteLine($"{genre.Genre}, {genre.GenreTotal}");
             }
 
             static string GetConnectionString()
