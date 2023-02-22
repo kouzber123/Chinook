@@ -25,7 +25,7 @@ Program contains the following methods:
 6. Add Customer - Create a new Customer and insert to sql server.
 7. Get top spenders - return sorted sql list with top spending customers in DESC order.
 8. Get top countries by customer amount - return sorted list where countries are listed with most customer but in DESC order.
-
+9. Get Top Genre - return customers favourite music genres.
 
 
 
